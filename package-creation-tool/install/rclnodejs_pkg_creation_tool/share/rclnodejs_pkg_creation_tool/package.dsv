@@ -1,0 +1,6 @@
+source;share\rclnodejs_pkg_creation_tool\hook\pythonpath.ps1
+source;share\rclnodejs_pkg_creation_tool\hook\pythonpath.bat
+source;share\rclnodejs_pkg_creation_tool\hook\pythonpath.dsv
+source;share\rclnodejs_pkg_creation_tool\hook\ament_prefix_path.ps1
+source;share\rclnodejs_pkg_creation_tool\hook\ament_prefix_path.bat
+source;share\rclnodejs_pkg_creation_tool\hook\ament_prefix_path.dsv
