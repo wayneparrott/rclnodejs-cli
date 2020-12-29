@@ -1,3 +1,6 @@
+TODO: update asap
+
+
 # ros2pkg_configure_nodejs
 **ros2pkg_configure_nodejs** is an extension, i.e., plugin, for the `ros2 pkg` CLI command that simplifies the implementation of ROS2 packages in JavaScript or TypeScript. The plugin extends an existing ROS2 package by scaffolding onto it customized Node.js artifacts, examples and updated installation scripts. **The result is a ROS2-Node.js package that can coexist and participate with other packages in a ROS2 workspace and can be run using the ROS2 `launch` facility.**
 

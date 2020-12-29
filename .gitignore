@@ -1,6 +1,9 @@
 build/
+install/
 log/
-
+package-creation-tool/build/
+package-creation-tool/install/
+package-creation-tool/log/
 
 .project
 /node_modules/
