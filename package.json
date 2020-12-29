@@ -1,0 +1,31 @@
+{
+  "name": "rclnodejs-cli",
+  "version": "0.0.1",
+  "description": "**ros2pkg_configure_nodejs** is an extension, i.e., plugin, for the `ros2 pkg` CLI command that simplifies the implementation of ROS2 packages in JavaScript or TypeScript. The plugin extends an existing ROS2 package by scaffolding onto it customized Node.js artifacts, examples and updated installation scripts. **The result is a ROS2-Node.js package that can coexist and participate with other packages in a ROS2 workspace and can be run using the ROS2 `launch` facility.**",
+  "main": "index.js",
+  "bin": {
+    "rclnodejs": "./index.js"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RobotWebTools/rclnodejs-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RobotWebTools/rclnodejs-cli/issues"
+  },
+  "homepage": "https://github.com/RobotWebTools/rclnodejs-cli#readme",
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "commander": "^6.2.1",
+    "figlet": "^1.5.0"
+  }
+}
