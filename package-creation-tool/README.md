@@ -1,82 +1,52 @@
-TODO: update asap
-
-
-# ros2pkg_configure_nodejs
-**ros2pkg_configure_nodejs** is an extension, i.e., plugin, for the `ros2 pkg` CLI command that simplifies the implementation of ROS2 packages in JavaScript or TypeScript. The plugin extends an existing ROS2 package by scaffolding onto it customized Node.js artifacts, examples and updated installation scripts. **The result is a ROS2-Node.js package that can coexist and participate with other packages in a ROS2 workspace and can be run using the ROS2 `launch` facility.**
+# `rclnodejs create-package` command
+The `rclnodejs create-package` command creates a hybrid ROS2-Nodejs package that can coexist and participate with other ROS2 packages in a ROS2 workspace and can be run using the ROS2 `launch` facility. A ROS2-Nodejs package consist of a ROS2 package, specifically an `ament-cmake` ROS2 package, overlaid with a Nodejs package. This command can also be run from the `ros2` cli as described in the [Running from ros2 cli]() section. 
 
 ## Key Features
-* Customizes and overlays Node.js resources onto ROS2 ament_cmake and cmake packages.
-* Creates a package.json based on ROS2 package.xml Manifest
-* `--typescript` commandline option to configure the package for use with TypeScript.
-* Includes the ROS2 JavaScript client, 
+* Creates a ROS2 ament_cmake packages and overlays it with a custom Nodejs package.
+*`--typescript` commandline option to configure the package for use with TypeScript.
+* Includes the ROS2 JavaScript client library, 
 [rclnodejs](https://github.com/RobotWebTools/rclnodejs) as a runtime dependency.
 * Creates an example launch-description.
-* Updates CMakeList.txt install() rules to install key runtime files to the package share/ folder
+* Customized CMakeList.txt install() rules to install key runtime files to the package share/ folder
 * Example JavaScript/TypeScript ROS2 publisher node.
 
-## Prerequisites
-* ROS2 Foxy or greater installed
-* Node.js version 12 or 13
-* npm or yarn package manager
-
-## Getting Started
-
-### 1. Clone and Build ros2pkg_configure_nodejs
-This is a new ROS2 package and not yet part of a formal ROS2 distribution. At some point in the future I hope to see that happen. Until then you will need to clone and build this GIT repository - a 1 minute task.
-
-From a command shell `cd` into a directory that will contain this package. Then enter the following commands:
+## Usage
+Create a new ROS2-Nodejs package basic usage:
 ```
-git clone https://github.com/ros2jsguy/ros2pkg_configure_nodejs.git
-cd ros2pkg_configure_nodejs
-colcon build
-```
-Next let's add the newly built ros2pkg_configure_nodejs package to our ROS2 environment. Do this by running the `install/setup.[bash|bat|sh|ps1]` file for your environment. For background on configuring your ROS2 environement see this [tutorial](https://index.ros.org/doc/ros2/Tutorials/Configuring-ROS2-Environment/).
-
-In my Linux environment I run this command:
-```
-source install/setup.bash
-```
-For future convience consider including the setup.[bat|bash|ps1] in your login script.
-
-Let's verify that ros2pkg_configure_nodejs is installed properly:
-Enter this command and observe the output.
-```
-ros2 pkg -h
-```
-You should see `configure_nodejs` in the Commands list similar to the output shown below.
-```
-usage: ros2 pkg [-h] Call `ros2 pkg <command> -h` for more detailed usage. ...
-
-Various package related sub-commands
-
-optional arguments:
-  -h, --help            show this help message and exit
-
-Commands:
-  configure_nodejs  Configure ROS2 package as Node.js package
-  create       Create a new ROS2 package
-  executables  Output a list of package specific executables
-  list         Output a list of available packages
-  prefix       Output the prefix path of a package
-  xml          Output the XML of the package manifest or a specific tag
-
-  Call `ros2 pkg <command> -h` for more detailed usage.
+> rclnodejs create-package <package_name>
+> rclnodejs create-package <package_name> --typescript
 ```
 
-### 2. Create ROS2 Package and Configure it as a Node.js Package
-In this section we will create a basic ROS2 package and then configuring it as a Node.js package.
-
-From your command shell `cd` to a directory that will contain the ROS2 package we will create. 
-
-For this tutorial we will name our ROS2 package `ros2_nodejs`. See [ROS2 Patterns and Conventions](http://wiki.ros.org/ROS/Patterns/Conventions) for naming practices.
-
-Enter the following commands:
+View the `create-package` options:
 ```
-ros2 pkg create ros2_nodejs
-cd ros2_nodejs
-ros2 pkg configure_nodejs
+> rclnodejs create-package -h
+
+           _                 _       _
+  _ __ ___| |_ __   ___   __| | ___ (_)___
+ | '__/ __| | '_ \ / _ \ / _` |/ _ \| / __|
+ | | | (__| | | | | (_) | (_| |  __/| \__ \
+ |_|  \___|_|_| |_|\___/ \__,_|\___|/ |___/
+                                  |__/
+Usage: rclnodejs create-package <package_name> [options...]
+
+Create a ROS2 package for Nodejs development.
+
+Options:
+  --description <description>               The description given in the package.xml
+  --destination-directory <directory_path>  Directory where to create the package directory
+  --license <license>                       The license attached to this package
+  --maintainer-email <email>                email address of the maintainer of this package
+  --maintainer-name <name>                  name of the maintainer of this package
+  --typescript                              Configure as a TypeScript Node.js project
+  --no-init                                 Do not run "npm init"
+  --dependencies <ros_packages...>          list of ROS dependencies
+  -h, --help                                display help for command
 ```
-The ros2_nodejs directory content should be similar to this listing.
+
+Note: Package naming should conform to the [ROS2 Patterns and Conventions](http://wiki.ros.org/ROS/Patterns/Conventions), e.g., use `_` underscores as separators in package names instead of '-' dashes.
+
+## Working with a ROS2-Nodejs Package
+The new package directory content should be similar to this listing.
 ```
 CMakeLists.txt
 __init__.py
@@ -90,47 +60,84 @@ src/
   index.js
 ```
 
-Now let's build the package using the `colcon` build utility. This will install the key JavaScript resources into the share/ folder.
-```
-colcon build
-```
-Your package folder will now include the standard ROS2 package directories: `build/`, `install/` and `log/`. The `install/' directory includes configuration scripts and if you look deep to `install/ros2_nodejs/share/ros2_nodejs` you will see the `install()` rules added to the CMakeLists.txt have installed the key JavaScript resources from the `src/` and `launch/` directories.
+**Note:
+The CMakeLists.txt includes `install` rules that you will need to customize for your project layout and runtime needs.**
 
-Lastly, add your new ros2_nodejs package to your ROS environment. 
+### 1. Use the `colcon` build utility to install the key JavaScript resources into the `./install/share/` folder.
+```
+> colcon build
+```
+Your package folder will now include the standard ROS2 package directories: `build/`, `install/` and `log/`. The `install/' directory includes configuration scripts and if you look deep to `install/ros2_nodejs/share/ros2_nodejs` you will see the `install()` rules in the CMakeLists.txt have installed the key JavaScript resources from the `src/` and `launch/` directories.
 
-From your command shell enter:
+### 2. Add your new ROS2-Nodejs package to your ROS environment. 
+
+From your <package-directory> run:
+Linux
 ```
-source install/setup.bash
+> source install/setup.bash 
 ```
-Verify that the ros2_nodejs package is part of your ROS2 environment using the `ros2` CLI command. 
+Windows
 ```
-ros2 pkg list
+> install\setup.bat #windows
+```
+
+### 3. Verify that the ROS2-Nodejs package is part of your ROS2 environment using the `ros2` CLI command. 
+```
+> ros2 pkg list
 ```
 This command will output a long list of the packages in your ROS2 environment. Scroll through the list and verify it contains the ros2_nodejs package.
 
-### 3. Launch example.launch.py
-We can now use the `ros2 launch` command to run the `example.launch.py` launch-description. This launch file defines how to startup the example app in our ros2_nodejs package. The example app creates a ROS2 node and publisher that sends a message every second to the topic named `foo`. See `src/index.js` in the ros2_nodejs package for details of the JavaScript implementation.
+### 4. Launch example.launch.py
+We can now use the `ros2 launch` command to run the `example.launch.py` launch-description. This launch file defines how to startup the example app in our ROS2-Nodejs package. The example app creates a ROS2 node and publisher that sends a message every second to the topic named `foo`. See `src/index.js` in the `src` folder for details of the JavaScript implementation.
 ```
 ros2 launch ros2_nodejs example.launch.py
 ```
 To view the messages being published to the `foo` topic, open a separate command shell configured with your ROS2 environment and enter:
 ```
-ros2 topic echo foo
+> ros2 topic echo foo
 ```
 A message should appear every second.
 
 ## Working With Typescript
-If you would like to work with TypeScript instead of JavaScript use the `--typescript` commandline option as shown below.
+If you would like to work with TypeScript instead of JavaScript use the `--typescript` commandline option as shown.
 ```
-ros2 pkg configure_nodejs --typescript
+> rclnodejs create-package <mypkg> --typescript
 ```
-The plugin will include a tsconfig.json file and a TypeScript example at `src/index.ts`.
+The the ROS2-Nodejs package will include a tsconfig.json file and a TypeScript example at `src/index.ts`.
+
+
+## Using from the `ros2` commandline
+An alternative way to use the `create-package` command is from the `ros2` commandline. 
+
+Before using, you must first extend your ROS2 environment by running the `install/setup.[bash|bat|sh|ps1]` script from the root folder of the `rclnode-cli packag`. For background on configuring your ROS2 environement see this [tutorial](https://index.ros.org/doc/ros2/Tutorials/Configuring-ROS2-Environment/).
+
+Verify the is command is installed properly:
+```
+> ros2 pkg -h
+```
+You should see `create_nodejs` in the Commands list similar to the output shown below.
+```
+usage: ros2 pkg [-h] Call `ros2 pkg <command> -h` for more detailed usage. ...
+
+Various package related sub-commands
+
+optional arguments:
+  -h, --help            show this help message and exit
+
+Commands:
+  create         Create a new ROS2 package
+  create_nodejs  Create a ROS2 package for Nodejs development.
+  executables    Output a list of package specific executables
+  list           Output a list of available packages
+  prefix         Output the prefix path of a package
+  xml            Output the XML of the package manifest or a specific tag
+
+  Call `ros2 pkg <command> -h` for more detailed usage.
+```
 
 # Getting Help / Providing Feedback
-Please post bug reports, feature requests and general discussion topics to the [ros2pkg_configure_nodejs project on github](https://github.com/ros2jsguy/ros2pkg_configure_nodejs).
+Please post bug reports, feature requests and general discussion topics to the [rclnodejs-cli project on github](https://github.com/RobotWebTool/rclnodejs-cli).
 
-# Thanks
-A special thanks to the rclnodejs team for developing the [rclnodejs, the ROS2 JavaScript SDK](https://github.com/RobotWebTools/rclnodejs) and supporting JavaScript in robotics.
 
 
 

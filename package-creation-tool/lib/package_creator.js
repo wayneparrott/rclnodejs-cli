@@ -10,7 +10,7 @@ class PkgCreator {
   configureCli(cli) {
     let createPkgCmd = cli.command('create-package <package-name>');
     createPkgCmd
-      .usage('create-package <package_name> [options...]')
+      .usage('<package_name> [options...]')
       .description('Create a ROS2 package for Nodejs development.')
       .option('--description <description>', 'The description given in the package.xml')
       .option('--destination-directory <directory_path>', 'Directory where to create the package directory')
