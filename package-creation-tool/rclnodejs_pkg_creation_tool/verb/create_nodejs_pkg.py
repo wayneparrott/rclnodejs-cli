@@ -275,4 +275,3 @@ def _run_npm_install():
     print(f'  Running \'{os.path.basename(npm)} install\' command.')
     return subprocess.run([npm, 'install'])
 
-

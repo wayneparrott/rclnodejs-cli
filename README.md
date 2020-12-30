@@ -1,9 +1,17 @@
 # rclnodejs-cli
 Standalone commandline tools and `ros2 cli` extensions for use with the ROS2 [rclnodejs]() client library.
 
+## Prerequisites
+* ROS2 Foxy or greater installed
+* Node.js version 12 or 13
+* npm or yarn package manager
+* Your shell environment that includes ROS2. See [Configuring a ROS2 Environment](https://index.ros.org/doc/ros2/Tutorials/Configuring-ROS2-Environment/) for more info.
 
 ## Installation
 Install the `rclnodejs-cli` package globally.
+
+Note: Your shell environment should include ROS2. 
+
 ```
 > npm install -g rclnodejs-cli
 or
@@ -26,10 +34,7 @@ or
 
 For more information on using an rclnodejs-cli tool from the `ros2` cli see the references to tool/command user-guides below. 
 
-## Prerequisites
-* ROS2 Foxy or greater installed
-* Node.js version 12 or 13
-* npm or yarn package manager
+
 ## Usage
 List available commands.
 ```
@@ -65,4 +70,4 @@ Example
 [Learn about the create-package tool](package-creation-tool/README.md).
 
 ## Contributors
-Wayne Parrott
+[Wayne Parrott](https://github.com/wayneparrott)

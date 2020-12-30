@@ -1,10 +1,6 @@
-#!/usr/bin/env node
-
-
 'use strict';
-const {
-  Command
-} = require('commander');
+
+const { Command } = require('commander');
 const figlet = require('figlet');
 const chalk = require('chalk');
 const PkgCreator = require('../package-creation-tool/lib/package_creator.js');
