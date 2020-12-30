@@ -5,7 +5,7 @@ Standalone commandline tools and `ros2 cli` extensions for use with the ROS2 [rc
 * ROS2 Foxy or greater installed
 * Node.js version 12 or 13
 * npm or yarn package manager
-* Your shell environment that includes ROS2. See [Configuring a ROS2 Environment](https://index.ros.org/doc/ros2/Tutorials/Configuring-ROS2-Environment/) for more info.
+* **A shell environment that includes ROS2.** See [Configuring a ROS2 Environment](https://index.ros.org/doc/ros2/Tutorials/Configuring-ROS2-Environment/) for more info.
 
 ## Installation
 Install the `rclnodejs-cli` package globally.
@@ -53,6 +53,7 @@ Options:
 
 Commands:
   create-package [options] <package-name>  Create a ROS2 package for Nodejs development.
+  generate-ros-messages                    Generate JavaScript code from ROS2 IDL interfaces
   help [command]                           display help for command
 
 ```
@@ -68,6 +69,9 @@ Example
 
 ## create-package command
 [Learn about the create-package tool](package-creation-tool/README.md).
+
+## generate-ros-messages command
+[Learn about the generate-ros-messages tool](message-generator-tool/README.md).
 
 ## Contributors
 [Wayne Parrott](https://github.com/wayneparrott)
