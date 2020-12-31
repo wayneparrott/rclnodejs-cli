@@ -58,7 +58,7 @@ Commands:
 
 ```
 
-List a subcommmand details.
+List a subcommand details.
 ```
 > rclnodejs <subcommand> -h
 ```
@@ -68,10 +68,15 @@ Example
 ```
 
 ## create-package command
-[Learn about the create-package tool](package-creation-tool/README.md).
+The `rclnodejs create-package` command creates a hybrid ROS2-Nodejs package that can coexist and participate with other ROS2 packages in a ROS2 workspace and can be run using the ROS2 `launch` facility. A ROS2-Nodejs package consist of a ROS2 package, specifically an `ament-cmake` ROS2 package, overlaid with a Nodejs package.
+
+[Learn more about the create-package tool](package-creation-tool/README.md).
 
 ## generate-ros-messages command
-[Learn about the generate-ros-messages tool](message-generator-tool/README.md).
+Generate JavaScript messages corresponding to the interfaces (.IDL)
+in your ROS2 environment. Run this command in the root folder of a Nodejs package that includes rlcnodejs as a dependency. The JavaScript message files are created in the `node_modules/rclnodejs/generated/` folder of the current Nodejs package.
+
+[Learn more about the generate-ros-messages tool](message-generator-tool/README.md).
 
 ## Contributors
 [Wayne Parrott](https://github.com/wayneparrott)
